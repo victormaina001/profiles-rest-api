@@ -1,7 +1,9 @@
 from django.shortcuts import render
 
 from rest_framework import viewsets
+from rest_framework.viewsets import ViewSet
 from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
@@ -10,6 +12,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from .serializers import UploadSerializer
 from . import serializers
 from . import models
 from . import permissions
@@ -146,3 +149,16 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user."""
 
         serializer.save(user_profile=self.request.user)
+
+ #ViewSets define the view behavior.
+class  UploadViewSet(ViewSet):
+      serializer_class = UploadSerializer
+
+      def list(self, request):
+        return Response("GET API")
+
+      def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)

@@ -1,6 +1,7 @@
 from rest_framework import serializers
-
+from rest_framework.serializers import Serializer, FileField, ListField
 from . import models
+from .models import File
 
 
 class HelloSerializer(serializers.Serializer):
@@ -36,3 +37,15 @@ class ProfileFeedItemSerializer(serializers.ModelSerializer):
         model = models.ProfileFeedItem
         fields = ('id', 'user_profile', 'status_text', 'created_on')
         extra_kwargs = {'user_profile': {'read_only': True}}
+# Serializers define the API representation.
+class UploadSerializer(Serializer):
+    file_uploaded = FileField()
+    class Meta:
+        fields = ['file_uploaded']
+
+
+# Serializer for multiple files upload.
+class MultipleFilesUploadSerializer(Serializer):
+    file_uploaded = ListField(FileField())
+    class Meta:
+        fields = ['file_uploaded']
