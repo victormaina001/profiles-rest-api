@@ -2,3 +2,6 @@ Django==1.11
 djangorestframework==3.6.2
 pytz==2020.5
 uWSGI==2.0.15
+pyparsing==2.2.0
+packaging==16.8
+siz==1.10.0
