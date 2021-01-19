@@ -155,7 +155,7 @@ class  UploadViewSet(ViewSet):
       serializer_class = UploadSerializer
 
       def list(self, request):
-        return Response("GET API")
+        return Response("Image Upload")
 
       def create(self, request):
         file_uploaded = request.FILES.get('file_uploaded')
